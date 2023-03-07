@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:oracle-ucp-spring-boot
+    username: sa
+    password: ""
+    # Vendor specific JDBC Driver
+    driver-class-name: org.h2.Driver
+    # Oracle JDBC Driver
+    # driver-class-name: oracle.jdbc.OracleDriver
+    type: oracle.ucp.jdbc.PoolDataSource
+    oracleucp:
+      # Vendor specific Connection Factory
+      connection-factory-class-name: org.h2.jdbcx.JdbcDataSource
+      # Oracle Connection Factory
+      # connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
+      connection-pool-name: oracle-ucp-spring-boot-pool
+      initial-pool-size: 10
+      min-pool-size: 10
+      max-pool-size: 10
+      sql-for-validate-connection: SELECT 1 FROM DUAL
+
+logging:
+  level:
+    oracle.ucp: DEBUG
