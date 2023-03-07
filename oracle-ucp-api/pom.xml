@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.programacho</groupId>
-  <artifactId>oracle-ucp-api-gym</artifactId>
+  <artifactId>oracle-ucp-api</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>oracle-ucp-api-gym</name>
+  <name>oracle-ucp-api</name>
   <url>http://maven.apache.org</url>
 
   <properties>

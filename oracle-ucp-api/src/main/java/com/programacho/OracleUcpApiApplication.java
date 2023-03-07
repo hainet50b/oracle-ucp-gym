@@ -10,18 +10,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
-public class OracleUcpApiGymApplication {
+public class OracleUcpApiApplication {
 
     public static void main(String[] args) {
         try {
             PoolDataSource ds = PoolDataSourceFactory.getPoolDataSource();
 
             ds.setConnectionFactoryClassName("org.h2.Driver");
-            ds.setURL("jdbc:h2:mem:oracle-ucp-api-gym");
+            ds.setURL("jdbc:h2:mem:oracle-ucp-api");
             ds.setUser("sa");
             ds.setPassword("");
 
-            ds.setConnectionPoolName("PROGRAMACHO_POOL");
+            ds.setConnectionPoolName("programacho-pool");
             ds.setMaxPoolSize(30);
             ds.setMinPoolSize(30);
 

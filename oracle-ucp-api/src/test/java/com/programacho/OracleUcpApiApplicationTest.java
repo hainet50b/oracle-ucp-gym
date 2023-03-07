@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class OracleUcpApiGymApplicationTest
+public class OracleUcpApiApplicationTest
     extends TestCase
 {
     /**
@@ -15,7 +15,7 @@ public class OracleUcpApiGymApplicationTest
      *
      * @param testName name of the test case
      */
-    public OracleUcpApiGymApplicationTest(String testName )
+    public OracleUcpApiApplicationTest(String testName )
     {
         super( testName );
     }
@@ -25,7 +25,7 @@ public class OracleUcpApiGymApplicationTest
      */
     public static Test suite()
     {
-        return new TestSuite( OracleUcpApiGymApplicationTest.class );
+        return new TestSuite( OracleUcpApiApplicationTest.class );
     }
 
     /**
