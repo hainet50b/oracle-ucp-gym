@@ -11,3 +11,8 @@ cd oracle-ucp-gym/oracle-ucp-spring-boot
 
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
 ```
+
+After you try samples, clean up resources.
+```sh
+docker rm $(docker stop mysql)
+```

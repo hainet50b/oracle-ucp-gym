@@ -35,3 +35,6 @@ spring:
     type: oracle.ucp.jdbc.PoolDataSource
     oracleucp:
       connection-factory-class-name: com.mysql.cj.jdbc.MysqlDataSource
+  sql:
+    init:
+      mode: always
