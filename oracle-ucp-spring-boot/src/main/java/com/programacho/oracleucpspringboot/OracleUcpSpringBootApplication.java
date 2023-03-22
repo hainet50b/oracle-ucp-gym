@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -13,7 +14,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class OracleUcpSpringBootApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OracleUcpSpringBootApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(OracleUcpSpringBootApplication.class, args);
+        if (context.getEnvironment().getProperty("spring.profiles.active") == null) {
+            context.close();
+        }
     }
 
     private final Logger log = LoggerFactory.getLogger(OracleUcpSpringBootApplication.class);

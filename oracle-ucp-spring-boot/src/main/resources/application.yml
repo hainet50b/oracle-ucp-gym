@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:oracle-ucp-spring-boot
+    url: jdbc:h2:mem:oracle_ucp_spring_boot
     username: sa
     password: ""
     # Vendor specific JDBC Driver
@@ -18,7 +18,20 @@ spring:
       min-pool-size: 10
       max-pool-size: 10
       sql-for-validate-connection: SELECT 1 FROM DUAL
+      query-timeout: 3
 
 logging:
   level:
     oracle.ucp: DEBUG
+
+---
+spring.config.activate.on-profile: mysql
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/oracle_ucp_spring_boot
+    username: root
+    password: changeme
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: oracle.ucp.jdbc.PoolDataSource
+    oracleucp:
+      connection-factory-class-name: com.mysql.cj.jdbc.MysqlDataSource
