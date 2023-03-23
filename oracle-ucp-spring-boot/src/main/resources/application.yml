@@ -3,16 +3,10 @@ spring:
     url: jdbc:h2:mem:oracle_ucp_spring_boot
     username: sa
     password: ""
-    # Vendor specific JDBC Driver
     driver-class-name: org.h2.Driver
-    # Oracle JDBC Driver
-    # driver-class-name: oracle.jdbc.OracleDriver
     type: oracle.ucp.jdbc.PoolDataSource
     oracleucp:
-      # Vendor specific Connection Factory
       connection-factory-class-name: org.h2.jdbcx.JdbcDataSource
-      # Oracle Connection Factory
-      # connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
       connection-pool-name: oracle-ucp-spring-boot-pool
       initial-pool-size: 10
       min-pool-size: 10
@@ -34,6 +28,20 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     oracleucp:
       connection-factory-class-name: com.mysql.cj.jdbc.MysqlDataSource
+  sql:
+    init:
+      mode: always
+
+---
+spring.config.activate.on-profile: oracle
+spring:
+  datasource:
+    url: jdbc:mysql:thin:@//localhost:1521/oracle_ucp_spring_boot
+    username: root
+    password: changeme
+    driver-class-name: oracle.jdbc.OracleDriver
+    oracleucp:
+      connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
   sql:
     init:
       mode: always
