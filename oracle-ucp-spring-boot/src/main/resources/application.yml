@@ -32,7 +32,6 @@ spring:
     username: root
     password: changeme
     driver-class-name: com.mysql.cj.jdbc.Driver
-    type: oracle.ucp.jdbc.PoolDataSource
     oracleucp:
       connection-factory-class-name: com.mysql.cj.jdbc.MysqlDataSource
   sql:
