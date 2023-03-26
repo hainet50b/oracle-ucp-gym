@@ -11,7 +11,8 @@ spring:
       initial-pool-size: 10
       min-pool-size: 10
       max-pool-size: 10
-      sql-for-validate-connection: SELECT 1 FROM DUAL
+      sql-for-validate-connection: SELECT 1 FROM DUAL;
+      connection-validation-timeout: 3
       query-timeout: 3
 
 logging:

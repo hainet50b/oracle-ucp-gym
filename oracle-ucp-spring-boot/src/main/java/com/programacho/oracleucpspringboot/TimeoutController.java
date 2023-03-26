@@ -1,6 +1,8 @@
 package com.programacho.oracleucpspringboot;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +14,11 @@ public class TimeoutController {
 
     public TimeoutController(TimeoutService service) {
         this.service = service;
+    }
+
+    @PostMapping("/validation-delay/{timeout}")
+    public void validationDelay(@PathVariable int timeout) {
+        service.setValidationDelay(timeout);
     }
 
     @GetMapping("/query-timeout")

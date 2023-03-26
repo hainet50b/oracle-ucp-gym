@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class EmpService {
@@ -17,5 +18,9 @@ public class EmpService {
 
     public List<Map<String, Object>> findAll() {
         return jdbcTemplate.queryForList("SELECT * FROM emp;");
+    }
+
+    public void save() {
+        jdbcTemplate.update("INSERT INTO emp (name) VALUES (?);", UUID.randomUUID().toString());
     }
 }
