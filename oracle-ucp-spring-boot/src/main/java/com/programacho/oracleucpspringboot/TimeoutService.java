@@ -1,13 +1,10 @@
 package com.programacho.oracleucpspringboot;
 
-import oracle.ucp.jdbc.PoolDataSource;
 import org.springframework.dao.QueryTimeoutException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.UUID;
 
 @Service
@@ -15,26 +12,21 @@ public class TimeoutService {
 
     private final JdbcTemplate jdbcTemplate;
 
-    private final PoolDataSource dataSource;
+    private static final String SLOW_QUERY = "DECLARE " +
+            "  sum_val NUMBER := 0; " +
+            "BEGIN " +
+            "  FOR i IN 1..100000000 LOOP " +
+            "    sum_val := sum_val + i; " +
+            "  END LOOP; " +
+            "END;";
 
-    public TimeoutService(
-            JdbcTemplate jdbcTemplate,
-            DataSource dataSource) {
+    public TimeoutService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.dataSource = (PoolDataSource) dataSource;
-    }
-
-    public void setValidationDelay(int timeout) {
-        try {
-            dataSource.setSQLForValidateConnection(String.format("SELECT SLEEP(%d);", timeout));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void queryTimeout() {
         try {
-            jdbcTemplate.queryForObject("SELECT SLEEP(5);", Long.class);
+            jdbcTemplate.execute(SLOW_QUERY);
         } catch (QueryTimeoutException e) {
             throw new RuntimeException(e);
         }
@@ -42,12 +34,20 @@ public class TimeoutService {
 
     @Transactional
     public void withTransaction() {
-        jdbcTemplate.update("INSERT INTO emp (name) VALUES (?);", UUID.randomUUID().toString());
-        jdbcTemplate.queryForObject("SELECT SLEEP(5);", Long.class);
+        try {
+            jdbcTemplate.update("INSERT INTO emp (name) VALUES (?)", UUID.randomUUID().toString());
+            jdbcTemplate.execute(SLOW_QUERY);
+        } catch (QueryTimeoutException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void withNoTransaction() {
-        jdbcTemplate.update("INSERT INTO emp (name) VALUES (?);", UUID.randomUUID().toString());
-        jdbcTemplate.queryForObject("SELECT SLEEP(5);", Long.class);
+        try {
+            jdbcTemplate.update("INSERT INTO emp (name) VALUES (?)", UUID.randomUUID().toString());
+            jdbcTemplate.execute(SLOW_QUERY);
+        } catch (QueryTimeoutException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

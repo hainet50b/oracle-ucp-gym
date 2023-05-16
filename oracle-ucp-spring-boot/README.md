@@ -1,18 +1,30 @@
 # oracle-ucp-spring-boot
-Setup local MySQL with docker if you want to check timeout related samples.
-```sh
-docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=changeme -e MYSQL_DATABASE=oracle_ucp_spring_boot mysql:8.0.32
+
+sysユーザーでprogramachoユーザーの初期設定を行う。
+
+```shell
+docker run --name oracle -d -p 1521:1521 -e ORACLE_PASSWORD=changeme gvenzl/oracle-xe:21.3.0-slim
+
+sqlplus sys/changeme@//localhost:1521/XE as sysdba
 ```
 
-Then you start this app with a mysql profile.
-```sh
-git clone https://github.com/hainet50b/oracle-ucp-gym.git
-cd oracle-ucp-gym/oracle-ucp-spring-boot
-
-./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
+```sql
+CREATE USER programacho IDENTIFIED BY changeme;
+GRANT CREATE SESSION TO programacho;
+ALTER USER programacho QUOTA 100M ON users;
+GRANT CREATE ANY SEQUENCE, SELECT ANY SEQUENCE TO programacho;
 ```
 
-After you try samples, clean up resources.
-```sh
-docker rm $(docker stop mysql)
+programachoユーザーでテーブルを作成する。
+
+```shell
+sqlplus programacho/changeme@//localhost:1521/XE
+```
+
+```sql
+CREATE TABLE emp (
+    id NUMBER GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    CONSTRAINT pk PRIMARY KEY(id)
+);
 ```

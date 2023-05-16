@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:oracle_ucp_spring_boot
+    url: jdbc:h2:mem:oracle_ucp_spring_boot;MODE=Oracle
     username: sa
     password: ""
     driver-class-name: org.h2.Driver
@@ -14,6 +14,9 @@ spring:
       sql-for-validate-connection: SELECT 1 FROM DUAL;
       connection-validation-timeout: 3
       query-timeout: 3
+  sql:
+    init:
+      mode: embedded
   jackson:
     serialization:
       indent-output: true
@@ -23,29 +26,12 @@ logging:
     oracle.ucp: DEBUG
 
 ---
-spring.config.activate.on-profile: mysql
-spring:
-  datasource:
-    url: jdbc:mysql://localhost/oracle_ucp_spring_boot
-    username: root
-    password: changeme
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    oracleucp:
-      connection-factory-class-name: com.mysql.cj.jdbc.MysqlDataSource
-  sql:
-    init:
-      mode: always
-
----
 spring.config.activate.on-profile: oracle
 spring:
   datasource:
-    url: jdbc:mysql:thin:@//localhost:1521/oracle_ucp_spring_boot
-    username: root
+    url: jdbc:oracle:thin:@//localhost:1521/XE
+    username: programacho
     password: changeme
     driver-class-name: oracle.jdbc.OracleDriver
     oracleucp:
       connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
-  sql:
-    init:
-      mode: always

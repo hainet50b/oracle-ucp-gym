@@ -1,17 +1,14 @@
-### /emp/
-GET http://localhost:8080/emp/
+### GET /emp
+GET http://localhost:8080/emp
 
-### /timeout/validation-delay 1
-POST http://localhost:8080/timeout/validation-delay/1
+### POST /emp
+POST http://localhost:8080/emp
 
-### /timeout/validation-delay 5
-POST http://localhost:8080/timeout/validation-delay/5
+### POST /timeout/query-timeout
+POST http://localhost:8080/timeout/query-timeout
 
-### /timeout/query-timeout
-GET http://localhost:8080/timeout/query-timeout
+### POST /timeout/with-transaction
+POST http://localhost:8080/timeout/with-transaction
 
-### /timeout/with-transaction
-GET http://localhost:8080/timeout/with-transaction
-
-### /timeout/with-no-transaction
-GET http://localhost:8080/timeout/with-no-transaction
+### POST /timeout/with-no-transaction
+POST http://localhost:8080/timeout/with-no-transaction

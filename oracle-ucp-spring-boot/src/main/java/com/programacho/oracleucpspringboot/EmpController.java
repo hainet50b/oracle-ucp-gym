@@ -18,12 +18,12 @@ public class EmpController {
         this.service = service;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Map<String, Object>> findAll() {
         return service.findAll();
     }
 
-    @PostMapping("/")
+    @PostMapping
     public void save() {
         service.save();
     }

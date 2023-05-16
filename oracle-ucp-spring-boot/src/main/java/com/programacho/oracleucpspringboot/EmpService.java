@@ -17,10 +17,10 @@ public class EmpService {
     }
 
     public List<Map<String, Object>> findAll() {
-        return jdbcTemplate.queryForList("SELECT * FROM emp;");
+        return jdbcTemplate.queryForList("SELECT * FROM emp");
     }
 
     public void save() {
-        jdbcTemplate.update("INSERT INTO emp (name) VALUES (?);", UUID.randomUUID().toString());
+        jdbcTemplate.update("INSERT INTO emp (name) VALUES (?)", UUID.randomUUID().toString());
     }
 }
