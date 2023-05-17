@@ -1,10 +1,14 @@
 # oracle-ucp-spring-boot
 
-sysユーザーでprogramachoユーザーの初期設定を行う。
+DockerでOracleデータベースを立ち上げる。
 
 ```shell
 docker run --name oracle -d -p 1521:1521 -e ORACLE_PASSWORD=changeme gvenzl/oracle-xe:21.3.0-slim
+```
 
+sysユーザーでprogramachoユーザーの初期設定を行う。
+
+```shell
 sqlplus sys/changeme@//localhost:1521/XE as sysdba
 ```
 
