@@ -15,8 +15,9 @@ sqlplus sys/changeme@//localhost:1521/XE as sysdba
 ```sql
 CREATE USER programacho IDENTIFIED BY changeme;
 GRANT CREATE SESSION TO programacho;
-ALTER USER programacho QUOTA 100M ON users;
+GRANT CREATE TABLE, ALTER ANY TABLE, DROP ANY TABLE TO programacho;
 GRANT CREATE ANY SEQUENCE, SELECT ANY SEQUENCE TO programacho;
+ALTER USER programacho QUOTA 100M ON users;
 ```
 
 programachoユーザーでテーブルを作成する。
